@@ -20,6 +20,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "prettier": "^3.4.2",
-    "vite-plugin-eslint2": "^5.0.3"
+    "vite-plugin-eslint2": "^5.0.3",
+    "@nuxtjs/tailwindcss": "^6.12.2"
   }
 }
