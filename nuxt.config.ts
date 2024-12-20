@@ -2,17 +2,14 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  components: [
-    {
-      path: "~/components",
-      pathPrefix: false,
-    },
-  ],
-  modules: [
-    "@nuxt/eslint",
-    '@nuxtjs/tailwindcss'
-  ],
+  modules: ["@nuxt/eslint", "@nuxtjs/tailwindcss"],
   eslint: {
     checker: true,
   },
+  components: [
+    {
+      path: "~/components",
+      pathPrefix: true,
+    },
+  ],
 });

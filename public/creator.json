@@ -1,0 +1,27 @@
+{
+  "data": {
+    "creator": {
+      "firstName": "CRISTINA",
+      "lastName": "TABUN ",
+      "verified": true,
+      "profilePictureUrl": "https://d19opmbh5fn4kg.cloudfront.net/profile-pictures/547431/396734404_1270288517011316_7739317976124250283_n.jpg",
+      "city": "Southampton ",
+      "country": "United Kingdom",
+      "gender": "female",
+      "dateOfBirth": "1985-10-12",
+      "socialChannels": [
+        {
+          "profilePictureUrl": "https://d19opmbh5fn4kg.cloudfront.net/profile-pictures/547431/453704481_2476007875927459_4226746916395958328_n.jpg",
+          "channelName": "instagram",
+          "handle": "cristinatabun",
+          "facebookPage": {
+            "id": "816438735096170",
+            "profilePictureUrl": "https://d19opmbh5fn4kg.cloudfront.net/profile-pictures/547431/279389304_526612535686869_9039529013222203164_n.jpg",
+            "name": "Cristina's Style",
+            "handle": "cristinatabunstyle"
+          }
+        }
+      ]
+    }
+  }
+}
