@@ -11,5 +11,9 @@ export default defineNuxtConfig({
       path: "~/components",
       pathPrefix: true,
     },
+    {
+      path: "~/components/ui",
+      prefix: "UI",
+    },
   ],
 });
