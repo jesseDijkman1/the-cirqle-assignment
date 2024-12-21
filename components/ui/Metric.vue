@@ -8,7 +8,7 @@
       <IconStar />
     </button>
 
-    <strong class="text-4xl">
+    <strong :style="`color: ${color}`" class="text-4xl">
       {{ totalFixed }}
     </strong>
 
@@ -29,9 +29,11 @@
 </template>
 
 <script>
+  import ColorRange from "../../lib/ColorRange";
+
   // Maybe add some props that define a threshold so the metric can quickly indicate whether it's positive or not
   export default {
-    props: ["label", "organic", "paid", "total"],
+    props: ["label", "organic", "paid", "total", "thresholds"],
     computed: {
       organicFixed() {
         return (typeof this.organic === "number" ? this.organic : 0).toFixed(2);
@@ -45,6 +47,16 @@
             ? this.total
             : (this.organic ?? 0) + (this.paid ?? 0)
         ).toFixed(2);
+      },
+      color() {
+        if (!this.thresholds) return "currentColor";
+
+        const colorRange = new ColorRange(
+          ["#ff0000", "#ffffff", "#0BDC42"],
+          this.thresholds
+        );
+        const total = Number(this.totalFixed);
+        return colorRange.getColorFromRangeValue(total);
       },
     },
   };

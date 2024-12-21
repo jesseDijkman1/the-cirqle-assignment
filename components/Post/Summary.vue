@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <UIHeading tag="h2">Metrics</UIHeading>
     <div v-if="data">
       <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 xl:grid-cols-4">
@@ -8,6 +8,7 @@
           :organic="data.roi"
           :paid="data.adRoi"
           :total="data.totalRoi"
+          :thresholds="[0, 6, 9]"
         />
         <UIMetric
           label="Impressions"
