@@ -1,22 +1,23 @@
 <template>
-  <div v-if="data">
-    <div>
-      <GlobalVideo
-        width="720"
-        height="1280"
-        :sources="
-          data.imagesMeta.map(({ url, mimetype }) => ({
-            src: url,
-            type: mimetype,
-          }))
-        "
-      />
-    </div>
+  <div>
+    <UIHeading tag="h2">Post content</UIHeading>
+    <div v-if="data" class="flex flex-col space-y-4">
+      <div>
+        <UIVideo
+          width="720"
+          height="1280"
+          :sources="
+            data.imagesMeta.map(({ url, mimetype }) => ({
+              src: url,
+              type: mimetype,
+            }))
+          "
+        />
+      </div>
 
-    <div>
-      <GlobalHeading level="3">
+      <UIHeading tag="h3">
         {{ data.taskTitle }}
-      </GlobalHeading>
+      </UIHeading>
 
       <p>{{ data.content }}</p>
     </div>
