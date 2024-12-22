@@ -9,7 +9,7 @@
     <UIImage :isLoading :src="profilePictureUrl" />
 
     <div class="flex flex-col w-full">
-      <UIHeading :isLoading tag="h2">{{ fullName }} </UIHeading>
+      <UIHeading :isLoading tag="h2">{{ fullName }}, {{ age }} </UIHeading>
 
       <ul class="flex flex-col justify-evenly w-full space-y-3">
         <li>
@@ -77,6 +77,16 @@
 </template>
 
 <script>
+  function calculate_age(dob) {
+    // Calculate the difference in milliseconds between the current date and the provided date of birth
+    var diff_ms = Date.now() - dob.getTime();
+    // Create a new Date object representing the difference in milliseconds and store it in the variable age_dt (age Date object)
+    var age_dt = new Date(diff_ms);
+
+    // Calculate the absolute value of the difference in years between the age Date object and the year 1970 (UNIX epoch)
+    return Math.abs(age_dt.getUTCFullYear() - 1970);
+  }
+
   export default {
     props: {
       data: {
@@ -94,6 +104,22 @@
       },
       profilePictureUrl() {
         return this.creatorData?.profilePictureUrl || null; // Fallback to empty string if URL doesn't exist
+      },
+      age() {
+        const now = new Date();
+        const birthDate = new Date(this.creatorData.dateOfBirth);
+
+        let age = now.getUTCFullYear() - birthDate.getUTCFullYear();
+
+        if (
+          now.getMonth() > birthDate.getMonth() ||
+          (now.getMonth() === birthDate.getMonth() &&
+            now.getDate() > birthDate.getDate())
+        ) {
+          age++;
+        }
+
+        return age;
       },
       fullName() {
         const creator = this.creatorData;
