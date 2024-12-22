@@ -9,7 +9,7 @@
           :organic="summaryData?.roi"
           :paid="summaryData?.adRoi"
           :total="summaryData?.totalRoi"
-          :thresholds="[0, 6, 9]"
+          :thresholds="[0, 2, 5]"
           graphValueKey="totalRoi"
           :graphData="trendingData"
         />
@@ -19,6 +19,7 @@
           :organic="summaryData?.impressions"
           :paid="summaryData?.adImpressions"
           :total="summaryData?.totalImpressions"
+          :thresholds="[0, 5000, 15000]"
           graphValueKey="totalImpressions"
           :graphData="trendingData"
         />
@@ -28,6 +29,7 @@
           :organic="summaryData?.clicks"
           :paid="summaryData?.adClicks"
           :total="summaryData?.totalClicks"
+          :thresholds="[50, 350, 500]"
           graphValueKey="totalClicks"
           :graphData="trendingData"
         />
@@ -37,6 +39,7 @@
           :organic="summaryData?.revenue"
           :paid="summaryData?.adRevenue"
           :total="summaryData?.totalRevenue"
+          :thresholds="[200, 1200, 2500]"
           graphValueKey="totalRevenue"
           :graphData="trendingData"
         />
@@ -46,6 +49,7 @@
           :organic="summaryData?.spend"
           :paid="summaryData?.adSpend"
           :total="summaryData?.totalSpend"
+          :thresholds="[0, 800, 1200]"
           graphValueKey="totalSpend"
           :graphData="trendingData"
         />

@@ -7,7 +7,7 @@
     :width="svgWidth"
     :viewBox="svgViewBox"
   >
-    <path stroke="currentColor" stroke-width="1" :d="pathData" />
+    <path :stroke="strokeColor" stroke-width="1" :d="pathData" />
   </svg>
 </template>
 

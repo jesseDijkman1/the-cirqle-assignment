@@ -32,6 +32,7 @@
         v-if="graphData"
         :data="graphData"
         :valueKey="graphValueKey"
+        :strokeColor="color"
       />
     </div>
   </div>
