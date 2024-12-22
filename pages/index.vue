@@ -1,12 +1,12 @@
 <template>
   <NuxtLayout name="main-layout">
-    <template #:summary>
+    <template #summary>
       <PostSummary :data="data" />
     </template>
-    <template #:content>
+    <template #content>
       <PostContent :data="data" />
     </template>
-    <template #:profile>
+    <template #profile>
       <PostProfile :data="data" />
     </template>
   </NuxtLayout>
