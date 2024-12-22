@@ -32,8 +32,6 @@
         mouseY = e.clientY;
         this.$refs.button.style.background = `radial-gradient(circle at ${mouseX - buttonBounding.left}px ${mouseY - buttonBounding.top}px, red 40px, blue 40px)`;
       });
-
-      console.log(this.$refs.button);
     },
   };
 </script>
