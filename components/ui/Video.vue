@@ -2,16 +2,21 @@
   <div
     :class="[
       'w-full h-auto bg-black flex justify-center rounded-xl',
-      { '!bg-skeleton-loader min-h-[460px]': isLoading },
+      { '!bg-skeleton-loader min-h-[28.75rem]': isLoading },
     ]"
   >
     <video
       :width="width"
       :height="height"
       controls
-      :class="['max-h-[460px] h-full w-auto', { 'opacity-0': isLoading }]"
+      :class="['max-h-[28.75rem] h-full w-auto', { 'opacity-0': isLoading }]"
     >
-      <source v-for="source in sources" :src="source.src" :type="source.type" />
+      <source
+        v-for="(source, index) in sources"
+        :key="`source-${index}`"
+        :src="source.src"
+        :type="source.type"
+      />
     </video>
   </div>
 </template>

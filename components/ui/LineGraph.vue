@@ -7,7 +7,7 @@
     :width="svgWidth"
     :viewBox="svgViewBox"
   >
-    <path stroke="currentColor" stroke-width="1" :d="pathData" />
+    <path :stroke="strokeColor" stroke-width="1" :d="pathData" />
   </svg>
 </template>
 
@@ -40,7 +40,7 @@
         if (!this.data || this.data.length === 0) return [];
 
         let maxValue = 0;
-        for (let obj of this.data) {
+        for (const obj of this.data) {
           if (obj[this.valueKey] > maxValue) maxValue = obj[this.valueKey];
         }
 

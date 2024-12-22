@@ -3,72 +3,75 @@
     <span
       class="absolute top-4 right-4 [&>svg]:w-6 [&>svg]:h-auto text-green-400"
     >
-      <IconVerified :isLoading />
+      <IconVerified :is-loading />
     </span>
 
-    <UIImage :isLoading :src="profilePictureUrl" />
+    <UIImage :is-loading :src="profilePictureUrl" />
 
     <div class="flex flex-col w-full">
-      <UIHeading :isLoading tag="h2">{{ fullName }} </UIHeading>
+      <UIHeading :is-loading tag="h2">{{ fullName }}, {{ age }} </UIHeading>
 
       <ul class="flex flex-col justify-evenly w-full space-y-3">
         <li>
-          <span
-            target="_blank"
+          <UIBlock
             class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
           >
-            <IconWorld :isLoading />
+            <IconWorld :is-loading />
             <span
               :class="[
                 { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
               ]"
               >{{ country }}</span
             >
-          </span>
+          </UIBlock>
         </li>
         <li>
-          <span
-            target="_blank"
+          <UIBlock
             class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
           >
-            <IconLocation :isLoading />
+            <IconLocation :is-loading />
             <span
               :class="[
                 { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
               ]"
               >{{ city }}</span
             >
-          </span>
+          </UIBlock>
         </li>
         <li>
           <a
             :href="`https://www.instagram.com/${instagramHandle}`"
             target="_blank"
-            class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
-            id="post-profile-instagram-link"
           >
-            <IconInstagram :isLoading />
-            <span
-              :class="[
-                { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
-              ]"
-              >{{ instagramHandle }}</span
+            <UIBlock
+              class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
             >
+              <IconInstagram :is-loading />
+              <span
+                :class="[
+                  { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
+                ]"
+                >{{ instagramHandle }}</span
+              >
+            </UIBlock>
           </a>
         </li>
         <li>
           <a
             :href="`https://www.facebook.com/${facebookHandle}`"
             target="_blank"
-            class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
           >
-            <IconFacebook :isLoading />
-            <span
-              :class="[
-                { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
-              ]"
-              >{{ facebookHandle }}</span
+            <UIBlock
+              class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
             >
+              <IconFacebook :is-loading />
+              <span
+                :class="[
+                  { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
+                ]"
+                >{{ facebookHandle }}</span
+              >
+            </UIBlock>
           </a>
         </li>
       </ul>
@@ -93,7 +96,23 @@
         return this.data.creator;
       },
       profilePictureUrl() {
-        return this.creatorData?.profilePictureUrl || null; // Fallback to empty string if URL doesn't exist
+        return this.creatorData?.profilePictureUrl || null;
+      },
+      age() {
+        const now = new Date();
+        const birthDate = new Date(this.creatorData.dateOfBirth);
+
+        let age = now.getUTCFullYear() - birthDate.getUTCFullYear();
+
+        if (
+          now.getMonth() > birthDate.getMonth() ||
+          (now.getMonth() === birthDate.getMonth() &&
+            now.getDate() > birthDate.getDate())
+        ) {
+          age++;
+        }
+
+        return age;
       },
       fullName() {
         const creator = this.creatorData;

@@ -1,12 +1,12 @@
 <template>
   <NuxtLayout name="main-layout">
-    <template v-slot:summary>
+    <template #:summary>
       <PostSummary :data="data" />
     </template>
-    <template v-slot:content>
+    <template #:content>
       <PostContent :data="data" />
     </template>
-    <template v-slot:profile>
+    <template #:profile>
       <PostProfile :data="data" />
     </template>
   </NuxtLayout>
@@ -32,7 +32,8 @@
           const response = await fetch("/api/post-data");
           this.data = await response.json();
         } catch (error) {
-          console.error(err);
+          // Do something with the error ...
+          console.error(error);
         }
       },
     },

@@ -1,7 +1,7 @@
 import * as path from "node:path";
 import * as fs from "node:fs";
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const summaryFilePath = path.join(process.cwd(), "public", "summary.json");
   const creatorFilePath = path.join(process.cwd(), "public", "creator.json");
   const trendingFilePath = path.join(process.cwd(), "public", "trending.json");
@@ -19,6 +19,7 @@ export default defineEventHandler(async (event) => {
       trending: JSON.parse(trendingData),
     };
   } catch (err) {
+    console.error(err);
     return {
       summary: null,
       creator: null,

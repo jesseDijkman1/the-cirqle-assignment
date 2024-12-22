@@ -1,17 +1,18 @@
 <template>
   <div
     :class="[
-      'grid grid-rows-[60px,0fr] transition-all ease-in-out duration-300',
-      isOpen ? 'grid-rows-[60px,1fr]' : 'grid-rows-[60px,0fr]',
+      'grid grid-rows-[3.75rem,0fr] transition-all ease-in-out duration-300',
+      isOpen ? 'grid-rows-[3.75rem,1fr]' : 'grid-rows-[3.75rem,0fr]',
     ]"
   >
     <button
       type="button"
-      @click="toggle"
       class="flex justify-center space-x-4 items-center"
+      @click="toggle"
     >
       <span
         :class="[
+          'underline',
           {
             'bg-skeleton-loader w-20 h-4 rounded block text-transparent':
               isLoading,
@@ -21,7 +22,7 @@
       >
 
       <IconArrowDown
-        :isLoading
+        :is-loading
         :class="[
           'transition-transform ease-in-out duration-300',
           { '-scale-100': isOpen },

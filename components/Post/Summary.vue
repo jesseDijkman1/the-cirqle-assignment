@@ -1,61 +1,65 @@
 <template>
   <div>
-    <UIHeading :isLoading tag="h2">Metrics</UIHeading>
+    <UIHeading :is-loading tag="h2">Metrics</UIHeading>
     <div>
       <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 xl:grid-cols-4">
         <UIMetric
-          :isLoading
+          :is-loading
           label="RoAS"
           :organic="summaryData?.roi"
           :paid="summaryData?.adRoi"
           :total="summaryData?.totalRoi"
-          :thresholds="[0, 6, 9]"
-          graphValueKey="totalRoi"
-          :graphData="trendingData"
+          :thresholds="[0, 2, 5]"
+          graph-value-key="totalRoi"
+          :graph-data="trendingData"
         />
         <UIMetric
-          :isLoading
+          :is-loading
           label="Impressions"
           :organic="summaryData?.impressions"
           :paid="summaryData?.adImpressions"
           :total="summaryData?.totalImpressions"
-          graphValueKey="totalImpressions"
-          :graphData="trendingData"
+          :thresholds="[0, 5000, 15000]"
+          graph-value-key="totalImpressions"
+          :graph-data="trendingData"
         />
         <UIMetric
-          :isLoading
+          :is-loading
           label="Clicks"
           :organic="summaryData?.clicks"
           :paid="summaryData?.adClicks"
           :total="summaryData?.totalClicks"
-          graphValueKey="totalClicks"
-          :graphData="trendingData"
+          :thresholds="[50, 350, 500]"
+          graph-value-key="totalClicks"
+          :graph-data="trendingData"
         />
         <UIMetric
-          :isLoading
+          :is-loading
           label="Revenue"
           :organic="summaryData?.revenue"
           :paid="summaryData?.adRevenue"
           :total="summaryData?.totalRevenue"
-          graphValueKey="totalRevenue"
-          :graphData="trendingData"
+          :thresholds="[200, 1200, 2500]"
+          graph-value-key="totalRevenue"
+          :graph-data="trendingData"
         />
         <UIMetric
-          :isLoading
+          :is-loading
           label="Ad Spend"
           :organic="summaryData?.spend"
           :paid="summaryData?.adSpend"
           :total="summaryData?.totalSpend"
-          graphValueKey="totalSpend"
-          :graphData="trendingData"
+          :thresholds="[0, 800, 1200]"
+          graph-value-key="totalSpend"
+          :graph-data="trendingData"
         />
       </div>
 
       <UIAccordion
-        :isLoading
+        :is-loading
         label="See more information"
-        openLabel="See more"
-        closeLabel="See less"
+        open-label="See more"
+        close-label="See less"
       >
         <UITable :data="tableData" />
       </UIAccordion>
