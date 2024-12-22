@@ -10,13 +10,9 @@
         {{ summaryData?.taskTitle }}
       </UIHeading>
 
-      <div v-if="isLoading" class="flex flex-col space-y-2">
-        <div class="w-full h-4 bg-skeleton-loader rounded"></div>
-        <div class="w-2/3 h-4 bg-skeleton-loader rounded"></div>
-        <div class="w-1/3 h-4 bg-skeleton-loader rounded"></div>
-      </div>
-
-      <p v-else>{{ summaryData?.content }}</p>
+      <UIParagraph :isLoading :loaderLines="3">{{
+        summaryData?.content
+      }}</UIParagraph>
     </div>
   </div>
 </template>
