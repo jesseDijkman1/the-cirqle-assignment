@@ -1,17 +1,5 @@
 <template>
-  <NuxtLayout name="main-layout">
-    <template v-slot:top>
-      <PostSummary />
-    </template>
-
-    <template v-slot:center>
-      <PostContent />
-    </template>
-
-    <template v-slot:bottom>
-      <PostProfile />
-    </template>
-  </NuxtLayout>
+  <NuxtPage />
 </template>
 
 <style>
