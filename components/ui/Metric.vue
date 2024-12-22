@@ -31,8 +31,8 @@
       <UILineGraph
         v-if="graphData"
         :data="graphData"
-        :valueKey="graphValueKey"
-        :strokeColor="color"
+        :value-key="graphValueKey"
+        :stroke-color="color"
       />
     </div>
   </div>
@@ -65,10 +65,11 @@
       },
       thresholds: {
         type: Array,
+        default: () => [],
       },
       graphData: {
         type: Array,
-        default: [],
+        default: () => [],
       },
       graphValueKey: {
         type: String,
@@ -92,6 +93,7 @@
           return "currentColor";
         }
 
+        // This helper can turn data values into a color spectrum. Could be useful in that it quickly shows whether a number is positive or negative. In this project I randomely set the threshold as I don't really know when what is good.
         const colorRange = new ColorRange(
           ["#ff0000", "#ffffff", "#0BDC42"],
           this.thresholds

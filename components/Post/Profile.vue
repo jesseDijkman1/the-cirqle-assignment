@@ -3,20 +3,20 @@
     <span
       class="absolute top-4 right-4 [&>svg]:w-6 [&>svg]:h-auto text-green-400"
     >
-      <IconVerified :isLoading />
+      <IconVerified :is-loading />
     </span>
 
-    <UIImage :isLoading :src="profilePictureUrl" />
+    <UIImage :is-loading :src="profilePictureUrl" />
 
     <div class="flex flex-col w-full">
-      <UIHeading :isLoading tag="h2">{{ fullName }}, {{ age }} </UIHeading>
+      <UIHeading :is-loading tag="h2">{{ fullName }}, {{ age }} </UIHeading>
 
       <ul class="flex flex-col justify-evenly w-full space-y-3">
         <li>
           <UIBlock
             class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
           >
-            <IconWorld :isLoading />
+            <IconWorld :is-loading />
             <span
               :class="[
                 { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
@@ -29,7 +29,7 @@
           <UIBlock
             class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
           >
-            <IconLocation :isLoading />
+            <IconLocation :is-loading />
             <span
               :class="[
                 { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
@@ -42,12 +42,11 @@
           <a
             :href="`https://www.instagram.com/${instagramHandle}`"
             target="_blank"
-            id="post-profile-instagram-link"
           >
             <UIBlock
               class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
             >
-              <IconInstagram :isLoading />
+              <IconInstagram :is-loading />
               <span
                 :class="[
                   { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
@@ -65,7 +64,7 @@
             <UIBlock
               class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
             >
-              <IconFacebook :isLoading />
+              <IconFacebook :is-loading />
               <span
                 :class="[
                   { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
@@ -81,16 +80,6 @@
 </template>
 
 <script>
-  function calculate_age(dob) {
-    // Calculate the difference in milliseconds between the current date and the provided date of birth
-    var diff_ms = Date.now() - dob.getTime();
-    // Create a new Date object representing the difference in milliseconds and store it in the variable age_dt (age Date object)
-    var age_dt = new Date(diff_ms);
-
-    // Calculate the absolute value of the difference in years between the age Date object and the year 1970 (UNIX epoch)
-    return Math.abs(age_dt.getUTCFullYear() - 1970);
-  }
-
   export default {
     props: {
       data: {
@@ -107,7 +96,7 @@
         return this.data.creator;
       },
       profilePictureUrl() {
-        return this.creatorData?.profilePictureUrl || null; // Fallback to empty string if URL doesn't exist
+        return this.creatorData?.profilePictureUrl || null;
       },
       age() {
         const now = new Date();

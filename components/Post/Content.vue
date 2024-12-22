@@ -1,16 +1,21 @@
 <template>
   <div>
-    <UIHeading :isLoading tag="h2">Post content</UIHeading>
+    <UIHeading :is-loading tag="h2">Post content</UIHeading>
     <div class="flex flex-col space-y-4">
       <div>
-        <UIVideo :isLoading width="720" height="1280" :sources="videoSources" />
+        <UIVideo
+          :is-loading
+          width="720"
+          height="1280"
+          :sources="videoSources"
+        />
       </div>
 
-      <UIHeading :isLoading tag="h3">
+      <UIHeading :is-loading tag="h3">
         {{ summaryData?.taskTitle }}
       </UIHeading>
 
-      <UIParagraph :isLoading :loaderLines="3">{{
+      <UIParagraph :is-loading :loader-lines="3">{{
         summaryData?.content
       }}</UIParagraph>
     </div>

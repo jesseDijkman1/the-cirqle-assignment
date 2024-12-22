@@ -3,7 +3,7 @@
     <div
       v-if="isLoading"
       class="w-full max-w-xs bg-skeleton-loader rounded h-8"
-    ></div>
+    />
     <slot v-else />
   </component>
 </template>
@@ -41,21 +41,21 @@
   }
 
   h1 {
-    font-size: 32px;
+    font-size: 2rem;
   }
   h2 {
-    font-size: 26px;
+    font-size: 1.625rem;
   }
   h3 {
-    font-size: 22px;
+    font-size: 1.375rem;
   }
   h4 {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
   h5 {
-    font-size: 16px;
+    font-size: 1.625rem;
   }
   h6 {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 </style>

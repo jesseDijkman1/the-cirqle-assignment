@@ -6,7 +6,8 @@
       <thead class="border-b border-[rgba(255,255,255,.2)] bg-[rgba(0,0,0,.4)]">
         <tr>
           <th
-            v-for="item in tableHeadItems"
+            v-for="(item, index) in tableHeadItems"
+            :key="`thead-${index}`"
             class="text-left p-2 px-4 [&:not(:first-child)]:border-l border-[rgba(255,255,255,.2)]"
           >
             {{ item }}
@@ -15,11 +16,13 @@
       </thead>
       <tbody>
         <tr
-          v-for="row in tableBodyRows"
+          v-for="(row, trIndex) in tableBodyRows"
+          :key="`trow-${trIndex}`"
           class="[&:not(:first-child)]:border-t border-[rgba(255,255,255,.2)]"
         >
           <td
-            v-for="item in row"
+            v-for="(item, tdIndex) in row"
+            :key="`tdata-${tdIndex}`"
             class="text-left p-2 px-4 [&:not(:first-child)]:border-l border-[rgba(255,255,255,.2)]"
           >
             {{ item }}
@@ -35,7 +38,7 @@
     props: {
       data: {
         type: Array,
-        default: [],
+        default: () => [],
         validator(value) {
           return (
             Array.isArray(value) && value.every((row) => Array.isArray(row))
