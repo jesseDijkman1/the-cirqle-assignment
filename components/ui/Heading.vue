@@ -20,11 +20,7 @@
     setup(props, { slots }) {
       const hasSlot = (name) => !!slots[name];
 
-      console.log(slots.default);
       return { hasSlot };
-    },
-    mounted() {
-      console.log(this.$slots.default());
     },
   };
 </script>
