@@ -4,6 +4,11 @@
     width="1em"
     height="1em"
     viewBox="0 0 24 24"
+    :class="[
+      {
+        'bg-skeleton-loader rounded-full text-transparent': isLoading,
+      },
+    ]"
   >
     <g
       fill="none"
@@ -20,3 +25,14 @@
     </g>
   </svg>
 </template>
+
+<script>
+  export default {
+    props: {
+      isLoading: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  };
+</script>

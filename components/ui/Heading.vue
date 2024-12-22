@@ -1,12 +1,20 @@
 <template>
   <component :is="tag">
-    <slot />
+    <div
+      v-if="isLoading"
+      class="w-full max-w-xs bg-skeleton-loader rounded h-8"
+    ></div>
+    <slot v-else />
   </component>
 </template>
 
 <script>
   export default {
     props: {
+      isLoading: {
+        type: Boolean,
+        default: false,
+      },
       tag: {
         type: String,
         default: "h1",

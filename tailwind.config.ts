@@ -8,6 +8,7 @@ export default {
       colors: {
         blue: "#2125ff",
         "light-grey": "#c7c7c7",
+        "skeleton-loader": "#616161",
       },
     },
   },
