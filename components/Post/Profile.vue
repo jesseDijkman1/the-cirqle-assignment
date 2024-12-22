@@ -13,8 +13,7 @@
 
       <ul class="flex flex-col justify-evenly w-full space-y-3">
         <li>
-          <span
-            target="_blank"
+          <UIBlock
             class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
           >
             <IconWorld :isLoading />
@@ -24,11 +23,10 @@
               ]"
               >{{ country }}</span
             >
-          </span>
+          </UIBlock>
         </li>
         <li>
-          <span
-            target="_blank"
+          <UIBlock
             class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
           >
             <IconLocation :isLoading />
@@ -38,37 +36,43 @@
               ]"
               >{{ city }}</span
             >
-          </span>
+          </UIBlock>
         </li>
         <li>
           <a
             :href="`https://www.instagram.com/${instagramHandle}`"
             target="_blank"
-            class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
             id="post-profile-instagram-link"
           >
-            <IconInstagram :isLoading />
-            <span
-              :class="[
-                { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
-              ]"
-              >{{ instagramHandle }}</span
+            <UIBlock
+              class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
             >
+              <IconInstagram :isLoading />
+              <span
+                :class="[
+                  { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
+                ]"
+                >{{ instagramHandle }}</span
+              >
+            </UIBlock>
           </a>
         </li>
         <li>
           <a
             :href="`https://www.facebook.com/${facebookHandle}`"
             target="_blank"
-            class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
           >
-            <IconFacebook :isLoading />
-            <span
-              :class="[
-                { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
-              ]"
-              >{{ facebookHandle }}</span
+            <UIBlock
+              class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
             >
+              <IconFacebook :isLoading />
+              <span
+                :class="[
+                  { 'bg-skeleton-loader w-full h-4 rounded block': isLoading },
+                ]"
+                >{{ facebookHandle }}</span
+              >
+            </UIBlock>
           </a>
         </li>
       </ul>
