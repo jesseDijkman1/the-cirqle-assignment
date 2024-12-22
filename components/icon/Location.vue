@@ -20,9 +20,3 @@
     </g>
   </svg>
 </template>
-
-<script>
-  export default {
-    name: "HugeiconsLocation01",
-  };
-</script>
