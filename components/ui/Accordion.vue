@@ -12,6 +12,7 @@
     >
       <span
         :class="[
+          'underline',
           {
             'bg-skeleton-loader w-20 h-4 rounded block text-transparent':
               isLoading,

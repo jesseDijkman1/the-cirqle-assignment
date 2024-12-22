@@ -1,7 +1,7 @@
 <template>
   <main class="mt-16 mb-16 px-4 lg:px-10">
     <div
-      class="grid grid-cols-1 auto-rows-auto lg:grid-cols-[minmax(auto,300px),1fr] gap-8 lg:gap-12 max-w-7xl mx-auto"
+      class="grid grid-cols-1 auto-rows-auto lg:grid-cols-[minmax(auto,360px),1fr] gap-8 lg:gap-12 max-w-7xl mx-auto"
     >
       <section class="section lg:col-span-1 lg:col-start-2">
         <slot name="summary"></slot>
