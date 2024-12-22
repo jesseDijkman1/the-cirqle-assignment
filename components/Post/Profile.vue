@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col space-y-4 items-center relative">
+  <div v-if="data" class="flex flex-col space-y-4 items-center relative">
     <span
       v-if="verified"
       class="absolute top-4 right-4 [&>svg]:w-6 [&>svg]:h-auto text-green-400"
@@ -66,11 +66,15 @@
       },
     },
     computed: {
+      creatorData() {
+        if (!this.data || !this.data.creator) return null;
+        return this.data.creator;
+      },
       profilePictureUrl() {
-        return this.data?.creator?.profilePictureUrl || ""; // Fallback to empty string if URL doesn't exist
+        return this.creatorData?.profilePictureUrl || ""; // Fallback to empty string if URL doesn't exist
       },
       fullName() {
-        const creator = this.data?.creator;
+        const creator = this.creatorData;
         return creator
           ? `${creator.firstName} ${creator.lastName}`.toLowerCase()
           : "";
@@ -84,18 +88,18 @@
         return socialChannel?.facebookPage?.handle;
       },
       city() {
-        return this.data?.creator?.city || "";
+        return this.creatorData?.city || "";
       },
       country() {
-        return this.data?.creator?.country || "";
+        return this.creatorData?.country || "";
       },
       verified() {
-        return this.data?.creator?.verified || false;
+        return this.creatorData?.verified || false;
       },
     },
     methods: {
       getChannel(channelName) {
-        return this.data?.creator?.socialChannels?.find(
+        return this.creatorData?.socialChannels?.find(
           (sc) => sc.channelName === channelName
         );
       },

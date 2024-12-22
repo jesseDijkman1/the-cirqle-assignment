@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="data">
     <UIHeading tag="h2">Post content</UIHeading>
     <div class="flex flex-col space-y-4">
       <div>
@@ -7,10 +7,10 @@
       </div>
 
       <UIHeading tag="h3">
-        {{ data.taskTitle }}
+        {{ summaryData.taskTitle }}
       </UIHeading>
 
-      <p>{{ data.content }}</p>
+      <p>{{ summaryData.content }}</p>
     </div>
   </div>
 </template>
@@ -24,9 +24,13 @@
       },
     },
     computed: {
+      summaryData() {
+        if (!this.data || !this.data.summary) return null;
+        return this.data.summary;
+      },
       videoSources() {
         return (
-          this.data?.imagesMeta?.map(({ url, mimetype }) => ({
+          this.summaryData?.imagesMeta?.map(({ url, mimetype }) => ({
             src: url,
             type: mimetype,
           })) || []
