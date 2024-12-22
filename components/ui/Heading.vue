@@ -1,7 +1,6 @@
 <template>
   <component :is="tag">
-    <div v-if="loading" class="w-full max-w-40 h-4 bg-gray-500"></div>
-    <slot v-else></slot>
+    <slot />
   </component>
 </template>
 
@@ -9,18 +8,13 @@
   export default {
     props: {
       tag: {
-        default: "h1",
         type: String,
+        default: "h1",
+        validator(value) {
+          const validTags = ["h1", "h2", "h3", "h4", "h5", "h6", "p", "div"];
+          return validTags.includes(value);
+        },
       },
-      loading: {
-        default: false,
-        type: Boolean,
-      },
-    },
-    setup(props, { slots }) {
-      const hasSlot = (name) => !!slots[name];
-
-      return { hasSlot };
     },
   };
 </script>
@@ -41,12 +35,19 @@
   h1 {
     font-size: 32px;
   }
-
   h2 {
     font-size: 26px;
   }
-
   h3 {
     font-size: 22px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+  h5 {
+    font-size: 16px;
+  }
+  h6 {
+    font-size: 14px;
   }
 </style>
