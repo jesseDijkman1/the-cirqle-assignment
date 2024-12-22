@@ -1,49 +1,40 @@
 <template>
-  <div>
+  <div v-if="data">
     <UIHeading tag="h2">Post content</UIHeading>
-    <div v-if="data" class="flex flex-col space-y-4">
+    <div class="flex flex-col space-y-4">
       <div>
-        <UIVideo
-          width="720"
-          height="1280"
-          :sources="
-            data.imagesMeta.map(({ url, mimetype }) => ({
-              src: url,
-              type: mimetype,
-            }))
-          "
-        />
+        <UIVideo width="720" height="1280" :sources="videoSources" />
       </div>
 
       <UIHeading tag="h3">
-        {{ data.taskTitle }}
+        {{ summaryData.taskTitle }}
       </UIHeading>
 
-      <p>{{ data.content }}</p>
+      <p>{{ summaryData.content }}</p>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    data() {
-      return {
-        data: null,
-      };
+    props: {
+      data: {
+        type: Object,
+        required: true,
+      },
     },
-    computed() {},
-    mounted() {
-      this.fetchProfile();
-    },
-    methods: {
-      async fetchProfile() {
-        try {
-          const response = await fetch("/summary.json");
-          this.data = await response.json();
-        } catch (err) {
-          console.error(err);
-          this.data = {};
-        }
+    computed: {
+      summaryData() {
+        if (!this.data || !this.data.summary) return null;
+        return this.data.summary;
+      },
+      videoSources() {
+        return (
+          this.summaryData?.imagesMeta?.map(({ url, mimetype }) => ({
+            src: url,
+            type: mimetype,
+          })) || []
+        );
       },
     },
   };

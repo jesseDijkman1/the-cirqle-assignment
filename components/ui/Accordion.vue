@@ -1,6 +1,9 @@
 <template>
   <div
-    :class="`grid grid-rows-[60px,0fr] [&.open]:grid-rows-[60px,1fr] transition-all ease-in-out duration-300 ${isOpen ? 'open' : ''}`"
+    :class="[
+      'grid grid-rows-[60px,0fr] transition-all ease-in-out duration-300',
+      isOpen ? 'grid-rows-[60px,1fr]' : 'grid-rows-[60px,0fr]',
+    ]"
   >
     <button
       type="button"
@@ -9,7 +12,10 @@
     >
       <span>{{ isOpen ? closeLabel : openLabel }}</span>
       <IconArrowDown
-        class="[.open_&]:-scale-100 transition-transform ease-in-out duration-300"
+        :class="[
+          'transition-transform ease-in-out duration-300',
+          { '-scale-100': isOpen },
+        ]"
       />
     </button>
 

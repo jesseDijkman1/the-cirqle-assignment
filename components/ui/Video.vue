@@ -13,6 +13,25 @@
 
 <script>
   export default {
-    props: ["width", "height", "sources", "heightClass"],
+    props: {
+      width: {
+        type: Number,
+        required: true,
+      },
+      height: {
+        type: Number,
+        required: true,
+      },
+      sources: {
+        type: Array,
+        required: true,
+        validator(value) {
+          return (
+            Array.isArray(value) &&
+            value.every((source) => source.src && source.type)
+          );
+        },
+      },
+    },
   };
 </script>

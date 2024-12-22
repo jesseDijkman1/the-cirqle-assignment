@@ -37,40 +37,63 @@
 <script>
   import ColorRange from "../../lib/ColorRange";
 
-  // Maybe add some props that define a threshold so the metric can quickly indicate whether it's positive or not
   export default {
-    props: [
-      "label",
-      "organic",
-      "paid",
-      "total",
-      "thresholds",
-      "graphData",
-      "graphValueKey",
-    ],
+    props: {
+      label: {
+        type: String,
+        required: true,
+      },
+      organic: {
+        type: Number,
+        default: 0,
+      },
+      paid: {
+        type: Number,
+        default: 0,
+      },
+      total: {
+        type: Number,
+        default: null,
+      },
+      thresholds: {
+        type: Array,
+      },
+      graphData: {
+        type: Array,
+        default: [],
+      },
+      graphValueKey: {
+        type: String,
+        required: true,
+      },
+    },
     computed: {
       organicFixed() {
-        return (typeof this.organic === "number" ? this.organic : 0).toFixed(2);
+        return this.formatFixed(this.organic);
       },
       paidFixed() {
-        return (typeof this.paid === "number" ? this.paid : 0).toFixed(2);
+        return this.formatFixed(this.paid);
       },
       totalFixed() {
-        return (
-          typeof this.total === "number"
-            ? this.total
-            : (this.organic ?? 0) + (this.paid ?? 0)
-        ).toFixed(2);
+        return this.formatFixed(this.total ?? this.organic + this.paid);
       },
       color() {
-        if (!this.thresholds) return "currentColor";
+        const total = parseFloat(this.totalFixed);
+
+        if (!this.thresholds || this.thresholds.length < 2) {
+          return "currentColor";
+        }
 
         const colorRange = new ColorRange(
           ["#ff0000", "#ffffff", "#0BDC42"],
           this.thresholds
         );
-        const total = Number(this.totalFixed);
         return colorRange.getColorFromRangeValue(total);
+      },
+    },
+    methods: {
+      formatFixed(value) {
+        return typeof value === "number" ? value.toFixed(2) : "0.00";
       },
     },
   };

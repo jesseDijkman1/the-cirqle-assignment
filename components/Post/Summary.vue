@@ -1,48 +1,48 @@
 <template>
-  <div class="">
+  <div v-if="data">
     <UIHeading tag="h2">Metrics</UIHeading>
-    <div v-if="data">
+    <div>
       <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 xl:grid-cols-4">
         <UIMetric
           label="RoAS"
-          :organic="data.roi"
-          :paid="data.adRoi"
-          :total="data.totalRoi"
+          :organic="summaryData.roi"
+          :paid="summaryData.adRoi"
+          :total="summaryData.totalRoi"
           :thresholds="[0, 6, 9]"
           graphValueKey="totalRoi"
-          :graphData="trending"
+          :graphData="trendingData"
         />
         <UIMetric
           label="Impressions"
-          :organic="data.impressions"
-          :paid="data.adImpressions"
-          :total="data.totalImpressions"
+          :organic="summaryData.impressions"
+          :paid="summaryData.adImpressions"
+          :total="summaryData.totalImpressions"
           graphValueKey="totalImpressions"
-          :graphData="trending"
+          :graphData="trendingData"
         />
         <UIMetric
           label="Clicks"
-          :organic="data.clicks"
-          :paid="data.adClicks"
-          :total="data.totalClicks"
+          :organic="summaryData.clicks"
+          :paid="summaryData.adClicks"
+          :total="summaryData.totalClicks"
           graphValueKey="totalClicks"
-          :graphData="trending"
+          :graphData="trendingData"
         />
         <UIMetric
           label="Revenue"
-          :organic="data.revenue"
-          :paid="data.adRevenue"
-          :total="data.totalRevenue"
+          :organic="summaryData.revenue"
+          :paid="summaryData.adRevenue"
+          :total="summaryData.totalRevenue"
           graphValueKey="totalRevenue"
-          :graphData="trending"
+          :graphData="trendingData"
         />
         <UIMetric
           label="Ad Spend"
-          :organic="data.spend"
-          :paid="data.adSpend"
-          :total="data.totalSpend"
+          :organic="summaryData.spend"
+          :paid="summaryData.adSpend"
+          :total="summaryData.totalSpend"
           graphValueKey="totalSpend"
-          :graphData="trending"
+          :graphData="trendingData"
         />
       </div>
 
@@ -59,66 +59,58 @@
 
 <script>
   export default {
-    data() {
-      return {
-        data: null,
-        trending: null,
-      };
-    },
-    mounted() {
-      this.fetchProile();
-      this.fetchTrending();
+    props: {
+      data: {
+        type: Object,
+        required: true,
+      },
     },
     computed: {
+      summaryData() {
+        if (!this.data || !this.data.summary) return null;
+
+        return this.data.summary;
+      },
+      trendingData() {
+        if (!this.data || !this.data.trending) return null;
+        return this.data.trending;
+      },
       tableData() {
+        if (!this.summaryData) return [];
+
         return [
-          ["Metric", "Organice value", "Paid value", "Total Value"],
+          ["Metric", "Organic Value", "Paid Value", "Total Value"],
           [
             "Impressions",
-            this.data.impressions,
-            this.data.adImpressions,
-            this.data.totalImpressions,
+            this.summaryData.impressions,
+            this.summaryData.adImpressions,
+            this.summaryData.totalImpressions,
           ],
           [
             "Clicks",
-            this.data.clicks,
-            this.data.adClicks,
-            this.data.totalClicks,
+            this.summaryData.clicks,
+            this.summaryData.adClicks,
+            this.summaryData.totalClicks,
           ],
           [
             "Revenue",
-            this.data.revenue,
-            this.data.adRevenue,
-            this.data.totalRevenue,
+            this.summaryData.revenue,
+            this.summaryData.adRevenue,
+            this.summaryData.totalRevenue,
           ],
           [
-            "Ad spend",
-            this.data.spend,
-            this.data.adSpend,
-            this.data.totalSpend,
+            "Ad Spend",
+            this.summaryData.spend,
+            this.summaryData.adSpend,
+            this.summaryData.totalSpend,
           ],
-          ["RoAS", this.data.roi, this.data.adRoi, this.data.totalRoi],
+          [
+            "RoAS",
+            this.summaryData.roi,
+            this.summaryData.adRoi,
+            this.summaryData.totalRoi,
+          ],
         ];
-      },
-    },
-    methods: {
-      async fetchProile() {
-        try {
-          const response = await fetch("/summary.json");
-          this.data = await response.json();
-        } catch (err) {
-          console.error(err);
-          this.data = {};
-        }
-      },
-      async fetchTrending() {
-        try {
-          const response = await fetch("/trending.json");
-          this.trending = await response.json();
-        } catch (err) {
-          console.error(err);
-          this.trending = {};
-        }
       },
     },
   };

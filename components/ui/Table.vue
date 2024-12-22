@@ -32,13 +32,23 @@
 
 <script>
   export default {
-    props: ["data"],
+    props: {
+      data: {
+        type: Array,
+        default: [],
+        validator(value) {
+          return (
+            Array.isArray(value) && value.every((row) => Array.isArray(row))
+          );
+        },
+      },
+    },
     computed: {
       tableHeadItems() {
-        return this.data[0];
+        return this.data[0] || [];
       },
       tableBodyRows() {
-        return this.data.slice(1);
+        return this.data.slice(1) || [];
       },
     },
   };

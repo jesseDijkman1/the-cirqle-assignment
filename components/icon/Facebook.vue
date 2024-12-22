@@ -22,9 +22,3 @@
     </g>
   </svg>
 </template>
-
-<script>
-  export default {
-    name: "HugeiconsFacebook01",
-  };
-</script>
