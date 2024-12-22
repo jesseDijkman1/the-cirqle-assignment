@@ -1,7 +1,7 @@
 <template>
-  <div class="">
+  <div>
     <UIHeading tag="h2">Metrics</UIHeading>
-    <div v-if="data">
+    <div>
       <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 xl:grid-cols-4">
         <UIMetric
           label="RoAS"
@@ -59,20 +59,18 @@
 
 <script>
   export default {
-    data() {
-      return {
-        data: null,
-        trending: null,
-      };
-    },
-    mounted() {
-      this.fetchProile();
-      this.fetchTrending();
+    props: {
+      data: {
+        type: Object,
+        required: true,
+      },
     },
     computed: {
       tableData() {
+        if (!this.data) return [];
+
         return [
-          ["Metric", "Organice value", "Paid value", "Total Value"],
+          ["Metric", "Organic Value", "Paid Value", "Total Value"],
           [
             "Impressions",
             this.data.impressions,
@@ -92,33 +90,13 @@
             this.data.totalRevenue,
           ],
           [
-            "Ad spend",
+            "Ad Spend",
             this.data.spend,
             this.data.adSpend,
             this.data.totalSpend,
           ],
           ["RoAS", this.data.roi, this.data.adRoi, this.data.totalRoi],
         ];
-      },
-    },
-    methods: {
-      async fetchProile() {
-        try {
-          const response = await fetch("/summary.json");
-          this.data = await response.json();
-        } catch (err) {
-          console.error(err);
-          this.data = {};
-        }
-      },
-      async fetchTrending() {
-        try {
-          const response = await fetch("/trending.json");
-          this.trending = await response.json();
-        } catch (err) {
-          console.error(err);
-          this.trending = {};
-        }
       },
     },
   };

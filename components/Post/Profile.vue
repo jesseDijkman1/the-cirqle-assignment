@@ -2,39 +2,36 @@
   <div class="flex flex-col space-y-4 items-center relative">
     <span
       v-if="verified"
-      class="absolute top-4 right-4 [&>svg]:w-6 [&>svg]:h-auto text-green-400 b"
+      class="absolute top-4 right-4 [&>svg]:w-6 [&>svg]:h-auto text-green-400"
     >
       <IconVerified />
-      <UITooltip>Verified</UITooltip>
     </span>
 
-    <UIImage :src="data?.data?.creator?.profilePictureUrl" />
+    <UIImage :src="profilePictureUrl" />
 
     <div class="flex flex-col w-full">
-      <UIHeading tag="h2" :loading="data === null">{{ fullName }} </UIHeading>
+      <UIHeading tag="h2">{{ fullName }} </UIHeading>
 
       <ul class="flex flex-col justify-evenly w-full space-y-3">
-        <li>
+        <li v-if="country">
           <span
             target="_blank"
             class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
           >
             <IconWorld />
-
             <span>{{ country }}</span>
           </span>
         </li>
-        <li>
+        <li v-if="city">
           <span
             target="_blank"
             class="button relative flex items-center space-x-2 [&>svg]:w-5 [&>svg]:h-auto"
           >
             <IconLocation />
-
             <span>{{ city }}</span>
           </span>
         </li>
-        <li>
+        <li v-if="instagramHandle">
           <a
             :href="`https://www.instagram.com/${instagramHandle}`"
             target="_blank"
@@ -42,12 +39,10 @@
             id="post-profile-instagram-link"
           >
             <IconInstagram />
-
             <span>{{ instagramHandle }}</span>
           </a>
         </li>
-
-        <li>
+        <li v-if="facebookHandle">
           <a
             :href="`https://www.facebook.com/${facebookHandle}`"
             target="_blank"
@@ -64,65 +59,45 @@
 
 <script>
   export default {
-    data() {
-      return {
-        data: null,
-      };
+    props: {
+      data: {
+        type: Object,
+        required: true,
+      },
     },
     computed: {
+      profilePictureUrl() {
+        return this.data?.creator?.profilePictureUrl || ""; // Fallback to empty string if URL doesn't exist
+      },
       fullName() {
-        return this.data
-          ? `${this.data.data.creator.firstName} ${this.data.data.creator.lastName}`.toLowerCase()
-          : null;
+        const creator = this.data?.creator;
+        return creator
+          ? `${creator.firstName} ${creator.lastName}`.toLowerCase()
+          : "";
       },
       instagramHandle() {
-        if (this.data === null) return null;
-
-        const instagramChannel = this.data.data.creator.socialChannels.find(
-          (sc) => sc.channelName === "instagram"
-        );
-
-        if (instagramChannel) return instagramChannel.handle;
+        const socialChannel = this.getChannel("instagram");
+        return socialChannel?.handle;
       },
       facebookHandle() {
-        if (this.data === null) return null;
-
-        // Todo add validation (facebookPage handle migth not always exist)
-        const instagramChannel = this.data.data.creator.socialChannels.find(
-          (sc) => sc.channelName === "instagram"
-        );
-
-        if (instagramChannel && instagramChannel.facebookPage)
-          return instagramChannel.facebookPage.handle;
+        const socialChannel = this.getChannel("instagram");
+        return socialChannel?.facebookPage?.handle;
       },
       city() {
-        if (this.data === null) return null;
-
-        return this.data.data.creator.city;
+        return this.data?.creator?.city || "";
       },
       country() {
-        if (this.data === null) return null;
-
-        return this.data.data.creator.country;
+        return this.data?.creator?.country || "";
       },
       verified() {
-        if (this.data === null) return null;
-
-        return this.data.data.creator.verified;
+        return this.data?.creator?.verified || false;
       },
     },
-    mounted() {
-      this.fetchProile();
-    },
     methods: {
-      async fetchProile() {
-        try {
-          const response = await fetch("/creator.json");
-          this.data = await response.json();
-        } catch (err) {
-          console.error(err);
-          this.data = {};
-        }
+      getChannel(channelName) {
+        return this.data?.creator?.socialChannels?.find(
+          (sc) => sc.channelName === channelName
+        );
       },
     },
   };
