@@ -1,5 +1,5 @@
 <template>
-  <div class="w-32 h-32 bg-gray-500 rounded-full overflow-hidden">
+  <div class="w-32 h-32 rounded-full overflow-hidden bg-skeleton-loader">
     <img
       v-if="src"
       :src="src"

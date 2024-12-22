@@ -10,8 +10,18 @@
       @click="toggle"
       class="flex justify-center space-x-4 items-center"
     >
-      <span>{{ isOpen ? closeLabel : openLabel }}</span>
+      <span
+        :class="[
+          {
+            'bg-skeleton-loader w-20 h-4 rounded block text-transparent':
+              isLoading,
+          },
+        ]"
+        >{{ isOpen ? closeLabel : openLabel }}</span
+      >
+
       <IconArrowDown
+        :isLoading
         :class="[
           'transition-transform ease-in-out duration-300',
           { '-scale-100': isOpen },
@@ -27,7 +37,28 @@
 
 <script>
   export default {
-    props: ["label", "open", "openLabel", "closeLabel"],
+    props: {
+      isLoading: {
+        type: Boolean,
+        default: false,
+      },
+      label: {
+        type: String,
+        required: true,
+      },
+      open: {
+        type: Boolean,
+        default: false,
+      },
+      openLabel: {
+        type: String,
+        required: true,
+      },
+      closeLabel: {
+        type: String,
+        required: true,
+      },
+    },
     data() {
       return {
         isOpen: this.open ?? false,

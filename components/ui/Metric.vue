@@ -1,6 +1,9 @@
 <template>
   <div
-    class="w-full aspect-square relative text-white bg-[rgba(0,0,0,.4)] flex flex-col justify-center items-center rounded-lg z-0 pb-4"
+    :class="[
+      'w-full aspect-square relative text-white bg-[rgba(0,0,0,.4)] flex flex-col justify-center items-center rounded-lg z-0 pb-4',
+      { '!bg-skeleton-loader [&>*]:opacity-0': isLoading },
+    ]"
   >
     <p class="absolute top-1 left-2 text-green-400">{{ label }}</p>
 
@@ -39,6 +42,10 @@
 
   export default {
     props: {
+      isLoading: {
+        type: Boolean,
+        default: false,
+      },
       label: {
         type: String,
         required: true,
@@ -80,7 +87,7 @@
       color() {
         const total = parseFloat(this.totalFixed);
 
-        if (!this.thresholds || this.thresholds.length < 2) {
+        if (this.isLoading || !this.thresholds || this.thresholds.length < 2) {
           return "currentColor";
         }
 

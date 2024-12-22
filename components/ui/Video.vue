@@ -1,10 +1,15 @@
 <template>
-  <div class="w-full h-auto bg-black flex justify-center rounded-xl">
+  <div
+    :class="[
+      'w-full h-auto bg-black flex justify-center rounded-xl',
+      { '!bg-skeleton-loader min-h-[460px]': isLoading },
+    ]"
+  >
     <video
       :width="width"
       :height="height"
       controls
-      class="max-h-[460px] w-auto"
+      :class="['max-h-[460px] h-full w-auto', { 'opacity-0': isLoading }]"
     >
       <source v-for="source in sources" :src="source.src" :type="source.type" />
     </video>
@@ -14,6 +19,10 @@
 <script>
   export default {
     props: {
+      isLoading: {
+        type: Boolean,
+        default: false,
+      },
       width: {
         type: Number,
         required: true,

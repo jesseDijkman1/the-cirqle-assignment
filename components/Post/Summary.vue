@@ -1,52 +1,58 @@
 <template>
-  <div v-if="data">
-    <UIHeading tag="h2">Metrics</UIHeading>
+  <div>
+    <UIHeading :isLoading tag="h2">Metrics</UIHeading>
     <div>
       <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 xl:grid-cols-4">
         <UIMetric
+          :isLoading
           label="RoAS"
-          :organic="summaryData.roi"
-          :paid="summaryData.adRoi"
-          :total="summaryData.totalRoi"
+          :organic="summaryData?.roi"
+          :paid="summaryData?.adRoi"
+          :total="summaryData?.totalRoi"
           :thresholds="[0, 6, 9]"
           graphValueKey="totalRoi"
           :graphData="trendingData"
         />
         <UIMetric
+          :isLoading
           label="Impressions"
-          :organic="summaryData.impressions"
-          :paid="summaryData.adImpressions"
-          :total="summaryData.totalImpressions"
+          :organic="summaryData?.impressions"
+          :paid="summaryData?.adImpressions"
+          :total="summaryData?.totalImpressions"
           graphValueKey="totalImpressions"
           :graphData="trendingData"
         />
         <UIMetric
+          :isLoading
           label="Clicks"
-          :organic="summaryData.clicks"
-          :paid="summaryData.adClicks"
-          :total="summaryData.totalClicks"
+          :organic="summaryData?.clicks"
+          :paid="summaryData?.adClicks"
+          :total="summaryData?.totalClicks"
           graphValueKey="totalClicks"
           :graphData="trendingData"
         />
         <UIMetric
+          :isLoading
           label="Revenue"
-          :organic="summaryData.revenue"
-          :paid="summaryData.adRevenue"
-          :total="summaryData.totalRevenue"
+          :organic="summaryData?.revenue"
+          :paid="summaryData?.adRevenue"
+          :total="summaryData?.totalRevenue"
           graphValueKey="totalRevenue"
           :graphData="trendingData"
         />
         <UIMetric
+          :isLoading
           label="Ad Spend"
-          :organic="summaryData.spend"
-          :paid="summaryData.adSpend"
-          :total="summaryData.totalSpend"
+          :organic="summaryData?.spend"
+          :paid="summaryData?.adSpend"
+          :total="summaryData?.totalSpend"
           graphValueKey="totalSpend"
           :graphData="trendingData"
         />
       </div>
 
       <UIAccordion
+        :isLoading
         label="See more information"
         openLabel="See more"
         closeLabel="See less"
@@ -66,6 +72,9 @@
       },
     },
     computed: {
+      isLoading() {
+        return this.data === null;
+      },
       summaryData() {
         if (!this.data || !this.data.summary) return null;
 
